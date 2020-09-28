@@ -1,15 +1,21 @@
-//@author Ellie Malady
+/**
+ * 
+ * @author ellie malady
+ *
+ * @param <KeyType>
+ * @param <ValueType>
+ */
 public class Movie<KeyType, ValueType> {
-
 	private KeyType name;
 	private ValueType eidr;
+	private int id;
 
 	/**
 	 * creates an object of type movie
 	 * 
-	 * @param givenName  user inputted name of movie
-	 * @param givenEidr  user inputted EIDR identification number
-	 * @param givenGenre user inputted genre
+	 * @param givenName  user inputed name of movie
+	 * @param givenEidr  user inputed EIDR identification number
+	 * @param givenGenre user inputed genre
 	 */
 	public Movie(KeyType givenName, ValueType givenEidr) {
 		name = givenName;
@@ -34,6 +40,26 @@ public class Movie<KeyType, ValueType> {
 	 */
 	public ValueType getEidr() {
 		return eidr;
+
+	}
+	
+	/**
+	 * returns id
+	 * 
+	 * @return id code of movie object
+	 */
+	public int geId() {
+		return id;
+
+	}
+	
+	/**
+	 * sets id variable to new id
+	 * 
+	 * @param new id code of movie object
+	 */
+	public void setId(int newId) {
+		id = newId;
 
 	}
 
