@@ -1,4 +1,4 @@
-
+@author Ellie Malady
 public class Movie<KeyType, ValueType> {
 
 	private KeyType name;
@@ -53,13 +53,6 @@ public class Movie<KeyType, ValueType> {
 	 */
 	public void setEidr(ValueType newEidr) {
 		eidr = newEidr;
-	}
-
-	/**
-	 * @return string with name of the movie object
-	 */
-	public String toString() {
-		return (String) (name);
 	}
 
 }
