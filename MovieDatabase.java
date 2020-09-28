@@ -13,6 +13,13 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
   private int size;
   private int capacity;
 
+  private void loadMovies() {
+    IMDB movieList = new IMDB();
+    for(int i = 0; i < IMB.movieList.size(); i++) {
+      Movie currentMovie = IMB.movieList.get(i);
+      add(currentMovie.getName(), currentMovie.getEidr());
+    }
+  
   /**
    * Constructor to create a MovieDatabase object. Instantiates the capacity to 10.
    */
@@ -21,6 +28,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     this.size = 0;
     this.database = new LinkedList[this.capacity];
     this.orderedList = new LinkedList();
+    loadMovies();
   }
 
   /**
@@ -33,6 +41,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     this.size = 0;
     this.database = new LinkedList[this.capacity];
     this.orderedList = new LinkedList();
+    loadMovies();
   }
 
   /**
