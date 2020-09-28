@@ -33,7 +33,7 @@ public class IMDB {
 		while (scanner.hasNextLine()) {
 			String[] split = scanner.nextLine().split(" ");
 
-			Movie curr = new Movie(split[0], split[1], split[2]);
+			Movie curr = new Movie(split[0], split[1]);
 
 			movieList.add(curr);
 
