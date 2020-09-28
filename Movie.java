@@ -1,4 +1,4 @@
-@author Ellie Malady
+//@author Ellie Malady
 public class Movie<KeyType, ValueType> {
 
 	private KeyType name;
