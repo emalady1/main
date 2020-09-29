@@ -72,7 +72,6 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     if (movieName == null) {
       return false;
     }
-    movieName = (KeyType) movieName.toString().toLowerCase();
     int index = hash(movieName);
     this.size++;
     Movie newMovie = new Movie(movieName, movieEIDR);
@@ -203,6 +202,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
    * @return returns the hash index
    */
   private int hash(KeyType movieName) {
+    movieName = (KeyType) movieName.toString().toLowerCase();
     return Math.abs(movieName.hashCode() % this.capacity);
   }
 
