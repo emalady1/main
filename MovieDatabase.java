@@ -310,6 +310,9 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     this.database = new LinkedList[this.capacity];
     this.orderedList = new LinkedList();
     this.size = 0;
-
+  }
+  
+  public int getCapacity() {
+    return this.capacity;
   }
 }
