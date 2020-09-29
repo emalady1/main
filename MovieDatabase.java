@@ -160,7 +160,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
    */
   private boolean movieExists(KeyType movieName, LinkedList<Movie> linkedList) {
     for (int i = 0; i < linkedList.size(); i++) {
-      if (linkedList.get(i).getName().equals(movieName)) {
+      if (linkedList.get(i).getName().toString().toLowerCase().equals(movieName.toString().toLowerCase())) {
         return true;
       }
     }
