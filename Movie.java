@@ -15,7 +15,6 @@ public class Movie<KeyType, ValueType> {
 	 * 
 	 * @param givenName  user inputed name of movie
 	 * @param givenEidr  user inputed EIDR identification number
-	 * @param givenGenre user inputed genre
 	 */
 	public Movie(KeyType givenName, ValueType givenEidr) {
 		name = givenName;
