@@ -47,7 +47,7 @@ public class Movie<KeyType, ValueType> {
 	 * 
 	 * @return id code of movie object
 	 */
-	public int geId() {
+	public int getId() {
 		return id;
 
 	}
