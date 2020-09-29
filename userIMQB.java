@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class userIMQB{
 
     public static void main(String[] args) {
-        IMQB database = new IMQB();
+        MovieDatabase database = new MovieDatabase();
         //LOAD MOVIES INTO DATABASE
 
         Scanner scanner = new Scanner(System.in);
