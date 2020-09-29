@@ -2,24 +2,28 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
- * Creates an array of linkedlist[] holding movieName-movieEIDR pair objects.
- * Uses a hash function to add and remove
+ * Creates an array of linkedlist[] holding movieName-movieEIDR pair objects. Uses a hash function
+ * to add and remove
+ * 
  * @author lorko
  *
  */
-public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueType>{
+public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueType> {
   private LinkedList<Movie>[] database;
   private LinkedList<Movie> orderedList;
   private int size;
   private int capacity;
 
   private void loadMovies() {
-    IMDB movieList = new IMDB();
-    for(int i = 0; i < IMB.movieList.size(); i++) {
-      Movie currentMovie = IMB.movieList.get(i);
-      add(currentMovie.getName(), currentMovie.getEidr());
+    IMDB a = new IMDB();
+    System.out.println(a.returnList());
+    for (int i = 0; i < a.movieList.size(); i++) {
+      Movie currentMovie = a.movieList.get(i);
+      add((KeyType) currentMovie.getName(), (ValueType) currentMovie.getEidr());
     }
-  
+    System.out.println(filter());
+  }
+
   /**
    * Constructor to create a MovieDatabase object. Instantiates the capacity to 10.
    */
@@ -53,7 +57,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     String retString = "";
     for (int i = 0; i < this.orderedList.size(); i++) {
       retString += "[id: " + orderedList.get(i).getId() + "\n" + " name: "
-          + orderedList.get(i).getName() + "\n" + " EIDR: " + orderedList.get(i).getEIDR() + "]\n";
+          + orderedList.get(i).getName() + "\n" + " EIDR: " + orderedList.get(i).getEidr() + "]\n";
     }
     return retString;
   }
@@ -109,18 +113,17 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     }
     throw new NoSuchElementException("No such element exists");
   }
-  
+
   private void addToList(Movie newMovie) {
     if (this.orderedList == null) {
       this.orderedList.addFirst(newMovie);
       this.orderedList.getFirst().setId(this.size);
-    }
-    else if (!movieExists((KeyType) newMovie.getName(), this.orderedList)) {
+    } else if (!movieExists((KeyType) newMovie.getName(), this.orderedList)) {
       this.orderedList.add(newMovie);
       this.orderedList.getLast().setId(this.size);
     }
   }
- 
+
   /**
    * Helper method to look for a movie name
    * 
@@ -138,12 +141,12 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     }
     throw new NoSuchElementException("No such element exists");
   }
-  
+
   private ValueType getEidrHelper(KeyType movieName, LinkedList<Movie> list)
       throws NoSuchElementException {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getName().equals(movieName)) {
-        return (ValueType) list.get(i).getEIDR();
+        return (ValueType) list.get(i).getEidr();
       }
     }
     throw new NoSuchElementException("No such element exists");
@@ -186,7 +189,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
       if (oldDatabase[i] != null) {
         for (int j = 0; j < oldDatabase[i].size(); j++) {
           KeyType movieName = (KeyType) oldDatabase[i].get(j).getName();
-          ValueType movieEIDR = (ValueType) oldDatabase[i].get(j).getEIDR();
+          ValueType movieEIDR = (ValueType) oldDatabase[i].get(j).getEidr();
           add(movieName, movieEIDR);
         }
       }
@@ -204,8 +207,8 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
   }
 
   /**
-   * Creates and insert a movie into the database with the specified
-   * movie name and eidr
+   * Creates and insert a movie into the database with the specified movie name and eidr
+   * 
    * @param movieName name of the movie
    * @param movieEidr eidr of the movie
    * @return returns true if successfully added, false otherwise
@@ -216,8 +219,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
   }
 
   /**
-   * Gets and returns the Eidr of a move. To search for a movie,
-   * use search("movieName")
+   * Gets and returns the Eidr of a move. To search for a movie, use search("movieName")
    */
   @Override
   public ValueType get(KeyType movieName) throws NoSuchElementException {
@@ -233,6 +235,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
 
   /**
    * Gets the size of the database
+   * 
    * @return returns the size
    */
   @Override
@@ -242,6 +245,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
 
   /**
    * Checks whether a movie is in the database or not
+   * 
    * @param movieName movie to look for
    * @return returns true if movie exists, false otherwise
    */
@@ -259,6 +263,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
 
   /**
    * Removes the movie from the hashtable and in the ordered list
+   * 
    * @param movieName name of the movie
    * @return returns the eidr of the movie removed
    */
@@ -270,11 +275,11 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     int index = hash(movieName);
     for (int i = 0; i < this.database[index].size(); i++) {
       if (this.database[index].get(i).getName().equals(movieName)) {
-        ValueType returnVal = (ValueType) this.database[index].get(i).getEIDR();
+        ValueType returnVal = (ValueType) this.database[index].get(i).getEidr();
         removeFromList(this.database[index].get(i));
         this.database[index].remove(i);
         this.size--;
-        
+
         return returnVal;
       }
     }
@@ -283,11 +288,12 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
 
   /**
    * Removes a movie from the ordered list
+   * 
    * @param Movie movie to remove
    */
   private void removeFromList(Movie Movie) {
     if (this.orderedList.removeFirstOccurrence(Movie)) {
-      for(int i = 0; i < this.orderedList.size(); i++) {
+      for (int i = 0; i < this.orderedList.size(); i++) {
         Movie current = this.orderedList.get(i);
         if (current.getId() > Movie.getId()) {
           this.orderedList.get(i).setId(current.getId() - 1);
@@ -304,6 +310,6 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
     this.database = new LinkedList[this.capacity];
     this.orderedList = new LinkedList();
     this.size = 0;
-    
+
   }
 }
