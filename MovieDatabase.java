@@ -16,12 +16,10 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
 
   private void loadMovies() {
     IMDB a = new IMDB();
-    System.out.println(a.returnList());
     for (int i = 0; i < a.movieList.size(); i++) {
       Movie currentMovie = a.movieList.get(i);
       add((KeyType) currentMovie.getName(), (ValueType) currentMovie.getEidr());
     }
-    System.out.println(filter());
   }
 
   /**
