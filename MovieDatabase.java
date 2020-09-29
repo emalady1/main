@@ -142,7 +142,7 @@ public class MovieDatabase<KeyType, ValueType> implements MapADT<KeyType, ValueT
   private ValueType getEidrHelper(KeyType movieName, LinkedList<Movie> list)
       throws NoSuchElementException {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getName().equals(movieName)) {
+      if (list.get(i).getName().toString().toLowerCase().equals(movieName.toString().toLowerCase())) {
         return (ValueType) list.get(i).getEidr();
       }
     }
